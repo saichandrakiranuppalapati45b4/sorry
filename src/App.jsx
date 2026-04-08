@@ -59,8 +59,19 @@ function App() {
     
     // Jump to random position
     const padding = 100;
-    const newX = Math.random() * (window.innerWidth - 150);
-    const newY = Math.random() * (window.innerHeight - 100);
+    let maxX = 250; // Fallbacks
+    let maxY = 250;
+    
+    if (cardRef.current) {
+      const width = cardRef.current.offsetWidth;
+      const height = cardRef.current.offsetHeight;
+      // Subtract button dimensions (~100x50) and add padding (20px) to keep it inside
+      maxX = Math.max(0, width - 120);
+      maxY = Math.max(0, height - 70);
+    }
+    
+    const newX = 20 + Math.random() * maxX;
+    const newY = 20 + Math.random() * maxY;
     
     setNoButtonPos({
       position: 'absolute',
